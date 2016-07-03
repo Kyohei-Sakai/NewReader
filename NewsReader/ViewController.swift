@@ -9,14 +9,25 @@
 import UIKit
 import Alamofire
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate{
     
     //ニュース一覧データを格納する配列
     var newsDataArray = NSArray()
+    //テーブルビュー
+    @IBOutlet var table :UITableView!
+    //ニュース記事のURLを格納するString変数
+    var newsUrl = ""
+    //ニュース記事データの配信元を格納するString変数
+    var publisher = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        //ViewControllerのタイトルを設定
+        self.title = "News Reader"
+        //Table ViewのDataSource参照先指定
+        table.dataSource = self
+        //Table Viewのタップ時のdelegate先を指定
+        table.delegate = self
         
         //ニュース情報の取得先
         let requestUrl = "http://appcre.net/rss.php"
@@ -31,22 +42,89 @@ class ViewController: UIViewController {
                 //responseDataからキー値"results"を取り出す
                 self.newsDataArray = responseData["results"] as! NSArray
                 print("\(self.newsDataArray)")
+                //ニュースデータを取得したらテーブルビューに表示
+                self.table.reloadData()
                 
             case .Failure(let error):
                 print("通信エラー：\(error)")
             }
         }
+    }
+    
+    //テーブルビューのセルの数をnewsDataArrayに格納しているデータの数で設定
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return newsDataArray.count
+    }
+    //セルに表示する内容を設定
+    func tableView(tableView: UITableView, cellForRowAtIndexPath  indexPath: NSIndexPath) -> UITableViewCell {
+        // StoryBoardで取得したCellを取得
+        let cell = UITableViewCell(style:UITableViewCellStyle.Subtitle, reuseIdentifier: "Cell")
+        // ニュース記事データを取得（配列の"indexPath.row"番目の要素を取得）
+        let newsDic = newsDataArray[indexPath.row] as! NSDictionary
+        // タイトルとタイトルの行数、公開日時をCellにセット
+        cell.textLabel!.text = newsDic["title"] as? String
+        cell.textLabel!.numberOfLines = 3
+        cell.detailTextLabel!.text = newsDic["publishedDate"] as? String
+        return cell
+    }
+    
+    //テーブルビューのセルがタップされた処理
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        //セルのインデックスパス番号を出力
+        print("タップされたセルのインデックスパス：\(indexPath.row)")
+        //ニュース記事データを取得（配列の要素で"indexPath.row"番目の要素を取得）
+        let newsDic = newsDataArray[indexPath.row] as! NSDictionary
+        //ニュース記事のURLを取得
+        newsUrl = newsDic["unescapedUrl"] as! String
+        //ニュース配信元名を取得
+        publisher = newsDic["publisher"] as! String
+        //WebViewController画面へ遷移
+        performSegueWithIdentifier("toWebView", sender: self)
         
-        //ニュース記事データをテーブルビューに表示
-        
+        /* //ニュース記事をSafariで起動
+        //StringをNSURLに変換
+        let url = NSURL(string: newsUrl)!
+        //UIApplicationインスタンスを作成
+        let app = UIApplication.sharedApplication()
+        //openURLメソッドでURLを引数にWEBブラウザSafariを起動
+        app.openURL(url)
+        */
+    }
+    
+    //WebViewControllerへURLデータを渡す
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        //セグエ用にダウンキャストしたWebViewControllerのインスタンス
+        let wvc = segue.destinationViewController as! WebViewController
+        //変数newsURLの値をWebViewControllerの変数newsUrlに代入
+        wvc.newsUrl = newsUrl
+        //titleプロパティでWebViewControllerのタイトルにpublisherを代入
+        wvc.title = publisher
         
     }
 
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
 
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 
 }
 

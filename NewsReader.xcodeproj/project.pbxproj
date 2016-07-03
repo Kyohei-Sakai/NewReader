@@ -14,6 +14,7 @@
 		7FD7A8DC1D1E672900580D4C /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7FD7A8DA1D1E672900580D4C /* LaunchScreen.storyboard */; };
 		7FD7A8E71D1E672900580D4C /* NewsReaderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD7A8E61D1E672900580D4C /* NewsReaderTests.swift */; };
 		7FD7A8F21D1E672900580D4C /* NewsReaderUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FD7A8F11D1E672900580D4C /* NewsReaderUITests.swift */; };
+		7FDB44D71D292390007AE4AE /* WebViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7FDB44D61D292390007AE4AE /* WebViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -104,6 +105,7 @@
 		7FD7A8F11D1E672900580D4C /* NewsReaderUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsReaderUITests.swift; sourceTree = "<group>"; };
 		7FD7A8F31D1E672900580D4C /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		7FD7A8FF1D1E69E300580D4C /* Alamofire.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Alamofire.xcodeproj; path = "Alamofire-master/Alamofire.xcodeproj"; sourceTree = SOURCE_ROOT; };
+		7FDB44D61D292390007AE4AE /* WebViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WebViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -156,8 +158,9 @@
 			children = (
 				7FD7A8D11D1E672900580D4C /* AppDelegate.swift */,
 				7FD7A8D31D1E672900580D4C /* ViewController.swift */,
-				7FD7A8FF1D1E69E300580D4C /* Alamofire.xcodeproj */,
+				7FDB44D61D292390007AE4AE /* WebViewController.swift */,
 				7FD7A8D51D1E672900580D4C /* Main.storyboard */,
+				7FD7A8FF1D1E69E300580D4C /* Alamofire.xcodeproj */,
 				7FD7A8D81D1E672900580D4C /* Assets.xcassets */,
 				7FD7A8DA1D1E672900580D4C /* LaunchScreen.storyboard */,
 				7FD7A8DD1D1E672900580D4C /* Info.plist */,
@@ -388,6 +391,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				7FD7A8D41D1E672900580D4C /* ViewController.swift in Sources */,
+				7FDB44D71D292390007AE4AE /* WebViewController.swift in Sources */,
 				7FD7A8D21D1E672900580D4C /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -618,6 +622,7 @@
 				7FD7A8F81D1E672900580D4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7FD7A8F91D1E672900580D4C /* Build configuration list for PBXNativeTarget "NewsReaderTests" */ = {
 			isa = XCConfigurationList;
@@ -626,6 +631,7 @@
 				7FD7A8FB1D1E672900580D4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		7FD7A8FC1D1E672900580D4C /* Build configuration list for PBXNativeTarget "NewsReaderUITests" */ = {
 			isa = XCConfigurationList;
@@ -634,6 +640,7 @@
 				7FD7A8FE1D1E672900580D4C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
